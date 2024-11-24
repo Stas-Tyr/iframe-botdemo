@@ -46,27 +46,5 @@
 <!-- Chatbot Script -->
 <script src="https://app.tofuchat.io/js/chat_plugin.js" data-bot-id="30420"></script>
 
-<script>
-    // Function to check if the iframe content is accessible
-    (function() {
-        var iframe = document.getElementById('IframeDisplayElement');
-        var iframeLoaded = false;
-
-        // Set a timeout to check if the iframe has loaded
-        var loadTimeout = setTimeout(function() {
-            if (!iframeLoaded) {
-                // Redirect the iframe to the dummy page URL
-                iframe.src = 'https://tofuchat.io/';
-            }
-        }, 2000); // Adjust the timeout duration as needed
-
-        // Event listener for iframe load
-        iframe.onload = function() {
-            iframeLoaded = true;
-            clearTimeout(loadTimeout);
-        };
-    })();
-</script>
-
 </body>
 </html>
