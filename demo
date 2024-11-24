@@ -2,27 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customizable Page with Chatbot</title>
+    <title>Book a Demo Overlay Button with Chatbot</title>
     <style>
-        /* Wrapper div */
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Adjust the iframe to fill the container */
+        /* Ensure the iframe covers the entire area */
         #IframeDisplayElement {
             width: 100%;
-            height: 100%;
+            height: 100vh;
             border: none;
+            position: relative; /* Relative position to allow absolute positioning of the button */
         }
 
         /* Style for the overlay button */
         .book-demo-button {
             position: absolute;
-            top: 20px;
+            top: 20px; /* Position the button in the top right corner */
             right: 20px;
             padding: 10px 20px;
             background-color: #007bff;
@@ -31,99 +24,41 @@
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
-            z-index: 1000;
-            text-decoration: none;
-            display: inline-block;
+            z-index: 1000; /* Ensure the button is on top of the iframe */
+            text-decoration: none; /* Remove underline from the link */
+            display: inline-block; /* Ensure the button displays correctly */
         }
 
         /* Hover effect for the button */
         .book-demo-button:hover {
             background-color: #0056b3;
         }
-
-        /* Style for the dummy page */
-        .dummy-page {
-            width: 100%;
-            height: 100%;
-            background-color: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .dummy-page h1 {
-            font-size: 24px;
-            color: #343a40;
-        }
-
-        .dummy-page p {
-            font-size: 16px;
-            color: #6c757d;
-        }
     </style>
 </head>
 <body>
 
-<div class="iframe-container">
-    <!-- The iframe element -->
-    <iframe id="IframeDisplayElement" src=""></iframe>
+<!-- The iframe element -->
+<iframe id="IframeDisplayElement" src="https://aminos.ai/"></iframe>
 
-    <!-- The "Book a Demo" button overlay -->
-    <a href="https://calendly.com/tofuchat/demo" class="book-demo-button">Book a Demo Now</a>
+<!-- The "Book a Demo" button overlay -->
+<a href="https://calendly.com/tofuchat/demo" class="book-demo-button">Book a Demo Now</a>
 
-    <!-- The dummy page (initially hidden) -->
-    <div id="dummyPage" class="dummy-page" style="display: none;">
-        <h1>Content Unavailable</h1>
-        <p>The requested content cannot be displayed.</p>
-    </div>
-</div>
-
-<!-- Placeholder for custom JavaScript (e.g., chatbot script) -->
-<div id="custom-js-placeholder"></div>
+<!-- Chatbot Script -->
+<script src="https://app.tofuchat.io/js/chat_plugin.js" data-bot-id="30420"></script>
 
 <script>
-    // ===============================
-    // Configuration Section
-    // ===============================
-
-    // Insert your desired iframe URL here
-    var iframeUrl = 'https://chatbotsapp.cmsfly.com/'; // Replace with your URL
-
-    // Insert your custom JavaScript script URL here
-    var customJsScriptUrl = '<script src="https://app.tofuchat.io/js/chat_plugin.js" data-bot-id="30420"></script>'; // Replace with your script URL
-
-    // ===============================
-    // Do not edit below this line
-    // ===============================
-
-    // Set the iframe src attribute
-    var iframe = document.getElementById('IframeDisplayElement');
-    iframe.src = iframeUrl;
-
-    // Load the custom JavaScript script
-    if (customJsScriptUrl) {
-        var script = document.createElement('script');
-        script.src = customJsScriptUrl;
-        document.getElementById('custom-js-placeholder').appendChild(script);
-    }
-
-    // Existing script to handle iframe loading and dummy page
+    // Function to check if the iframe content is accessible
     (function() {
-        var dummyPage = document.getElementById('dummyPage');
+        var iframe = document.getElementById('IframeDisplayElement');
         var iframeLoaded = false;
 
         // Set a timeout to check if the iframe has loaded
         var loadTimeout = setTimeout(function() {
             if (!iframeLoaded) {
-                // Hide the iframe and show the dummy page
-                iframe.style.display = 'none';
-                dummyPage.style.display = 'flex';
+                // Redirect the iframe to the dummy page URL
+                iframe.src = 'https://tofuchat.io/';
             }
-        }, 5000); // Adjust the timeout duration as needed
+        }, 2000); // Adjust the timeout duration as needed
 
         // Event listener for iframe load
         iframe.onload = function() {
