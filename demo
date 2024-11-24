@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customizable Page with Chatbot</title>
+    <style>
+        /* Wrapper div */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Adjust the iframe to fill the container */
+        #IframeDisplayElement {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Style for the overlay button */
+        .book-demo-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Hover effect for the button */
+        .book-demo-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Style for the dummy page */
+        .dummy-page {
+            width: 100%;
+            height: 100%;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .dummy-page h1 {
+            font-size: 24px;
+            color: #343a40;
+        }
+
+        .dummy-page p {
+            font-size: 16px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="iframe-container">
+    <!-- The iframe element -->
+    <iframe id="IframeDisplayElement" src=""></iframe>
+
+    <!-- The "Book a Demo" button overlay -->
+    <a href="https://calendly.com/tofuchat/demo" class="book-demo-button">Book a Demo Now</a>
+
+    <!-- The dummy page (initially hidden) -->
+    <div id="dummyPage" class="dummy-page" style="display: none;">
+        <h1>Content Unavailable</h1>
+        <p>The requested content cannot be displayed.</p>
+    </div>
+</div>
+
+<!-- Placeholder for custom JavaScript (e.g., chatbot script) -->
+<div id="custom-js-placeholder"></div>
+
+<script>
+    // ===============================
+    // Configuration Section
+    // ===============================
+
+    // Insert your desired iframe URL here
+    var iframeUrl = 'https://chatbotsapp.cmsfly.com/'; // Replace with your URL
+
+    // Insert your custom JavaScript script URL here
+    var customJsScriptUrl = '<script src="https://app.tofuchat.io/js/chat_plugin.js" data-bot-id="30420"></script>'; // Replace with your script URL
+
+    // ===============================
+    // Do not edit below this line
+    // ===============================
+
+    // Set the iframe src attribute
+    var iframe = document.getElementById('IframeDisplayElement');
+    iframe.src = iframeUrl;
+
+    // Load the custom JavaScript script
+    if (customJsScriptUrl) {
+        var script = document.createElement('script');
+        script.src = customJsScriptUrl;
+        document.getElementById('custom-js-placeholder').appendChild(script);
+    }
+
+    // Existing script to handle iframe loading and dummy page
+    (function() {
+        var dummyPage = document.getElementById('dummyPage');
+        var iframeLoaded = false;
+
+        // Set a timeout to check if the iframe has loaded
+        var loadTimeout = setTimeout(function() {
+            if (!iframeLoaded) {
+                // Hide the iframe and show the dummy page
+                iframe.style.display = 'none';
+                dummyPage.style.display = 'flex';
+            }
+        }, 5000); // Adjust the timeout duration as needed
+
+        // Event listener for iframe load
+        iframe.onload = function() {
+            iframeLoaded = true;
+            clearTimeout(loadTimeout);
+        };
+    })();
+</script>
+
+</body>
+</html>
